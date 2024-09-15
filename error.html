@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 Not Found</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    </style>
+</head>
+<body>
+    <h1>404 Not Found</h1>
+    <p>サイトが閉鎖、もしくは削除された可能性があります。</p>
+    <button id="report-button">管理者に報告</button>
+
+    <div id="report-section">
+        <p>管理者に報告します。</p>
+        <input type="text" id="report-input" placeholder="内容">
+        <button id="submit-button">送信</button>
+    </div>
+
+    <script>
+        document.getElementById('report-button').addEventListener('click', function() {
+            document.getElementById('report-section').style.display = 'block';
+        });
+
+        document.getElementById('submit-button').addEventListener('click', function() {
+            const userInput = document.getElementById('report-input').value;
+            if (userInput === 'ak!win11') {
+                window.location.href = 'admin.html';
+            } else {
+                alert('エラーが発生しました。数時間後に再度お試しください。');
+            }
+        });
+    </script>
+</body>
+</html>

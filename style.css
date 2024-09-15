@@ -1,0 +1,129 @@
+/* 初期設定関連*/
+body { 
+  font-family: '教科書体', sans-serif;
+  background-color: #0a0f29;
+  color: #6699FF;
+  margin: 0;
+  padding: 50px;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.center-container {
+  text-align: center;
+}
+
+/* 文字関連 */
+header {
+  margin-bottom: 450px;
+  padding-top: 0px;
+}
+header h1 {
+  font-size: 48px;
+  margin-bottom: 10px;
+  margin-top: 0;
+}
+h1 {
+  font-size: 48px;
+  color: #6699FF;
+}
+p {
+  font-size: 18px;
+  color: #6699FF;
+}
+nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+nav ul li {
+  margin: 0 15px;
+}
+nav ul li a {
+  color: #6699FF;
+  text-decoration: none;
+  font-size: 18px;
+}
+footer {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #bbb;
+}
+
+/* ボタン関連 */
+#report-section {
+  display: none;
+  margin-top: 20px;
+}
+
+#report-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  color: #6699FF;
+  background-color: #0a0f29;
+}
+
+#submit-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  color: #6699FF;
+  background-color: #0a0f29;
+}
+
+#closeAllPages {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  color: #6699FF;
+  background-color: #0a0f29;
+}
+#reopenAllPages {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  color: #6699FF;
+  background-color: #0a0f29;
+}
+
+/* 入力関連 */
+input[type="text"] {
+  font-family: '教科書体', sans-serif;
+  padding: 10px;
+  font-size: 16px;
+  color: #6699FF;
+  background-color: #0a0f29;
+}
+
+/* その他 */
+#listContainer {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.5s ease, opacity 0.5s ease;
+  margin-top: 0px;
+}
+#listContainer.show {
+  max-height: 100px;
+  opacity: 1;
+  margin-top: 450px;
+}
+
+/* マウスの動きに応じて表示される水色の丸 */
+.mouse-circle {
+  position: absolute;
+  width: 50px; /* 丸の直径 */
+  height: 50px; /* 丸の直径 */
+  background-color: rgba(173, 216, 230, 0.5); /* 薄い水色 */
+  border-radius: 50%; /* 丸にする */
+  pointer-events: none; /* クリックイベントを無視する */
+  transform: translate(-50%, -50%); /* 丸をマウスの中心に合わせる */
+  transition: opacity 0.3s ease; /* フェードアウトのトランジション */
+  opacity: 0; /* 初期状態で非表示 */
+}
