@@ -1,30 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // サイト閉鎖チェックをサーバーから行う
-  checkSiteStatus();
-
-  function checkSiteStatus() {
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', 'status.json', true); // サーバー上の status.json を取得
-    xhr.onload = function() {
-      if (xhr.status === 200) {
-        const status = JSON.parse(xhr.responseText);
-
-        // サイトが閉鎖されている場合の処理
-        if (status.siteClosed) {
-          const currentPage = window.location.pathname.split('/').pop(); // 現在のページ名を取得
-
-          // admin.html または error.html 以外のページならリダイレクト
-          if (currentPage !== 'admin.html' && currentPage !== 'error.html') {
-            window.location.href = 'error.html'; // error.html にリダイレクト
-          }
-        }
-      } else {
-        console.error('サーバーから状態を取得できませんでした。');
-      }
-    };
-    xhr.send();
-  }
-
   // Listの表示切替機能
   const listToggle = document.getElementById('listToggle');
   const listContainer = document.getElementById('listContainer');
@@ -92,16 +66,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
   if (closeAllPagesButton && reopenAllPagesButton) {
     closeAllPagesButton.addEventListener('click', function() {
+      console.log('閉鎖ボタンがクリックされました。');
       updateSiteStatus(true);
     });
 
     reopenAllPagesButton.addEventListener('click', function() {
+      console.log('再開ボタンがクリックされました。');
       updateSiteStatus(false);
     });
   }
 
-  // サイト状態をサーバーに送信
   function updateSiteStatus(isClosed) {
+    console.log('サイト状態を更新しています。新しい状態:', isClosed);
     const xhr = new XMLHttpRequest();
     xhr.open('POST', 'update_status.php', true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
