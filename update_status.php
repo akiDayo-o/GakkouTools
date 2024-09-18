@@ -1,7 +1,5 @@
 <?php
-$token = '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'; // トークンを安全に管理してください
-<?php
-$token = getenv('GITHUB_TOKEN'); // 環境変数からトークンを取得
+$token = getenv('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'); // 環境変数からトークンを取得
 $repo = 'akidayo-o/aki';
 $file_path = 'status.json';
 
