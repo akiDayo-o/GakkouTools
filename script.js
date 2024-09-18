@@ -1,12 +1,28 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // サイト閉鎖チェック
-  if (localStorage.getItem('siteClosed') === 'true') {
-    const currentPage = window.location.pathname.split('/').pop(); // 現在のページ名を取得
-    // admin.html 以外のページは error.html にリダイレクト
-    if (currentPage !== 'admin.html' && currentPage !== 'error.html') {
-      window.location.href = 'error.html';
-      return; // 以降の処理を実行しない
-    }
+  // サイト閉鎖チェックをサーバーから行う
+  checkSiteStatus();
+
+  function checkSiteStatus() {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', 'status.json', true); // サーバー上の status.json を取得
+    xhr.onload = function() {
+      if (xhr.status === 200) {
+        const status = JSON.parse(xhr.responseText);
+
+        // サイトが閉鎖されている場合の処理
+        if (status.siteClosed) {
+          const currentPage = window.location.pathname.split('/').pop(); // 現在のページ名を取得
+
+          // admin.html または error.html 以外のページならリダイレクト
+          if (currentPage !== 'admin.html' && currentPage !== 'error.html') {
+            window.location.href = 'error.html'; // error.html にリダイレクト
+          }
+        }
+      } else {
+        console.error('サーバーから状態を取得できませんでした。');
+      }
+    };
+    xhr.send();
   }
 
   // Listの表示切替機能
@@ -24,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   }
-  
+
   // Adminページへのパスワード保護機能
   const adminLink = document.getElementById('adminLink');
 
@@ -44,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   }
-  
+
   // マウスの動きに応じて水色の丸を表示する機能
   const mouseCircle = document.createElement('div');
   mouseCircle.className = 'mouse-circle';
@@ -53,10 +69,11 @@ document.addEventListener('DOMContentLoaded', function() {
   let timeout;
 
   document.addEventListener('mousemove', function(event) {
-    // 丸の位置をマウスの位置に合わせる
-    mouseCircle.style.left = `${event.clientX}px`;
-    mouseCircle.style.top = `${event.clientY}px`;
-
+    window.requestAnimationFrame(() => {
+      mouseCircle.style.left = `${event.clientX}px`;
+      mouseCircle.style.top = `${event.clientY}px`;
+    });
+    
     // 以前のタイマーをクリア
     clearTimeout(timeout);
 

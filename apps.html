@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>機能リスト</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>サイトの機能リスト</h1>
+    </header>
+    <main>
+        <section id="function-list">
+            <button onclick="scrollToSection('feature1')">機能1</button>
+            <button onclick="scrollToSection('feature2')">機能2</button>
+            <button onclick="scrollToSection('feature3')">機能3</button>
+            <!-- 他の機能ボタンを追加 -->
+        </section>
+        <section id="feature1">
+            <h2>機能1</h2>
+            <p>機能1の詳細説明。</p>
+        </section>
+        <section id="feature2">
+            <h2>機能2</h2>
+            <p>機能2の詳細説明。</p>
+        </section>
+        <section id="feature3">
+            <h2>機能3</h2>
+            <p>機能3の詳細説明。</p>
+        </section>
+        <!-- 他の機能セクションを追加 -->
+    </main>
+    <script>
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

@@ -1,22 +1,30 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // サイト閉鎖ボタン
   const closeAllPagesButton = document.getElementById('closeAllPages');
-  // サイト再開ボタン
   const reopenAllPagesButton = document.getElementById('reopenAllPages');
-  
+
   // サイト閉鎖機能
   closeAllPagesButton.addEventListener('click', function() {
-    localStorage.setItem('siteClosed', 'true');
-    alert('サイトを閉鎖しました。');
-    // 全てのページをリロードして閉鎖状態にする
-    window.location.reload();
+    updateSiteStatus(true);
   });
-  
+
   // サイト再開機能
   reopenAllPagesButton.addEventListener('click', function() {
-    localStorage.removeItem('siteClosed');
-    alert('サイトを再開しました。');
-    // 全てのページをリロードして再開状態にする
-    window.location.reload();
+    updateSiteStatus(false);
   });
+
+  // サイト状態をサーバーに送信
+  function updateSiteStatus(isClosed) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'update_status.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onload = function() {
+      if (xhr.status === 200) {
+        alert(isClosed ? 'サイトを閉鎖しました。' : 'サイトを再開しました。');
+        window.location.reload();
+      } else {
+        alert('エラーが発生しました。');
+      }
+    };
+    xhr.send('siteClosed=' + isClosed);
+  }
 });
